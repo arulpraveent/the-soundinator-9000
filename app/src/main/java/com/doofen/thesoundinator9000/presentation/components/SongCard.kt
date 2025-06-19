@@ -1,5 +1,6 @@
 package com.doofen.thesoundinator9000.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +21,8 @@ fun SongCard(
     modifier: Modifier = Modifier
 ) {
     Card (
-        modifier = modifier.padding(8.dp)
+        modifier = modifier
+            .padding(8.dp)
     ) {
         Column (
             verticalArrangement = Arrangement.Center,
