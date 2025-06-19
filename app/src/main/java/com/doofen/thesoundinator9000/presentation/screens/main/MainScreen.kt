@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -29,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.doofen.thesoundinator9000.R
 import com.doofen.thesoundinator9000.presentation.navigation.MainNavGraph
 import com.doofen.thesoundinator9000.presentation.screens.home.HomeScreen
+import com.doofen.thesoundinator9000.presentation.screens.player.PlayerScreen
 
 @Composable
 fun MainScreen() {
@@ -57,6 +59,9 @@ fun MainScreen() {
                 composable(route = MainNavGraph.Home.route) {
                     HomeScreen(modifier = Modifier.padding(innerPadding))
                 }
+                composable(route = MainNavGraph.Player.route) {
+                    PlayerScreen()
+                }
             }
         },
         bottomBar = {
@@ -74,6 +79,27 @@ fun MainScreen() {
                         icon = {
                             Icon(
                                 imageVector = Icons.Default.Home,
+                                contentDescription = stringResource(R.string.home_icon_desc)
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = stringResource(R.string.home_icon_label),
+                                style = MaterialTheme.typography.labelMedium,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    )
+
+                    NavigationBarItem (
+                        selected = currentRoute === MainNavGraph.Player.route,
+                        onClick = {
+                            navController.navigate(MainNavGraph.Player.route)
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.PlayArrow,
                                 contentDescription = stringResource(R.string.home_icon_desc)
                             )
                         },

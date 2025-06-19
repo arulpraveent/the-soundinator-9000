@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.doofen.thesoundinator9000.presentation.components.SongCard
+import com.doofen.thesoundinator9000.presentation.screens.player.PlayerViewModel
 
 @Composable
 fun HomeScreen(
@@ -32,6 +33,8 @@ fun HomeScreen(
             val songs = (state as HomeUiState.Success).songs
             LazyColumn(modifier) {
                 items(songs) { song ->
+                    println(song.contentUri)
+                    println(song.filePath)
                     SongCard(
                         title = song.title,
                         artist = song.artist
