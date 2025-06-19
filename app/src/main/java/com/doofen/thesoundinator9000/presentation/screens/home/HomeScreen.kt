@@ -2,7 +2,6 @@ package com.doofen.thesoundinator9000.presentation.screens.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -13,8 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.doofen.thesoundinator9000.presentation.components.SongCard
 
 @Composable
 fun HomeScreen(
@@ -31,11 +30,11 @@ fun HomeScreen(
         is HomeUiState.Success -> {
             val songs = (state as HomeUiState.Success).songs
             LazyColumn {
-                item {
-                    Text("Success")
-                }
                 items(songs) { song ->
-                    Text(song.title, modifier = Modifier.padding(16.dp))
+                    SongCard(
+                        title = song.title,
+                        artist = song.artist
+                    )
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.doofen.thesoundinator9000.data.source
 
+import android.content.ContentUris
 import android.content.Context
 import android.provider.MediaStore
 import com.doofen.thesoundinator9000.domain.model.Song
@@ -8,11 +9,13 @@ import javax.inject.Inject
 
 class MediaStoreDataSource @Inject constructor(
     @ApplicationContext private val context: Context
-){
-    fun fetchAllSongs(): List<Song>{
+) {
+    fun fetchAllSongs(): List<Song> {
         val songList = mutableListOf<Song>()
 
-        val collection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        val collection =
+            MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
+
         val projection = arrayOf(
             MediaStore.Audio.Media._ID,
             MediaStore.Audio.Media.TITLE,
@@ -21,20 +24,33 @@ class MediaStoreDataSource @Inject constructor(
         )
 
         val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0"
-        val cursor = context.contentResolver.query(collection, projection, selection, null, null)
+        val sortOrder = "${MediaStore.Audio.Media.DATE_ADDED} DESC"
 
-        cursor?.use {
-            val idCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
-            val titleCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
-            val artistCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
-            val dataCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
+        context.contentResolver.query(
+            collection,
+            projection,
+            selection,
+            null,
+            sortOrder
+        )?.use { cursor ->
+            val idCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
+            val titleCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
+            val artistCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
+            val dataCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
 
-            while (it.moveToNext()) {
+            while (cursor.moveToNext()) {
+                val id = cursor.getLong(idCol)
+                val contentUri = ContentUris.withAppendedId(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    id
+                )
+
                 val song = Song(
-                    id = it.getLong(idCol),
-                    title = it.getString(titleCol),
-                    artist = it.getString(artistCol),
-                    path = it.getString(dataCol)
+                    id = id,
+                    title = cursor.getString(titleCol) ?: "Unknown",
+                    artist = cursor.getString(artistCol) ?: "Unknown Artist",
+                    contentUri = contentUri,
+                    filePath = dataCol.let { cursor.getString(it) }
                 )
                 songList.add(song)
             }
