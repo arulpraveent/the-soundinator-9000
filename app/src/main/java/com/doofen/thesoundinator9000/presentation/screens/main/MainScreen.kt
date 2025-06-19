@@ -20,11 +20,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.doofen.thesoundinator9000.R
 import com.doofen.thesoundinator9000.presentation.navigation.MainNavGraph
 import com.doofen.thesoundinator9000.presentation.screens.home.HomeScreen
 
@@ -72,12 +74,12 @@ fun MainScreen() {
                         icon = {
                             Icon(
                                 imageVector = Icons.Default.Home,
-                                contentDescription = "Home"
+                                contentDescription = stringResource(R.string.home_icon_desc)
                             )
                         },
                         label = {
                             Text(
-                                text = "Home",
+                                text = stringResource(R.string.home_icon_label),
                                 style = MaterialTheme.typography.labelMedium,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
