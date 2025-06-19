@@ -1,7 +1,7 @@
 package com.doofen.thesoundinator9000
 
-import android.content.pm.PackageManager
 import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.doofen.thesoundinator9000.presentation.screens.home.HomeScreen
 import com.doofen.thesoundinator9000.presentation.screens.main.MainScreen
 import com.doofen.thesoundinator9000.presentation.theme.TheSoundinator9000Theme
 import dagger.hilt.android.AndroidEntryPoint
