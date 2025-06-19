@@ -17,19 +17,20 @@ import com.doofen.thesoundinator9000.presentation.components.SongCard
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
 
     when (state) {
         is HomeUiState.Loading -> {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         }
         is HomeUiState.Success -> {
             val songs = (state as HomeUiState.Success).songs
-            LazyColumn {
+            LazyColumn(modifier) {
                 items(songs) { song ->
                     SongCard(
                         title = song.title,

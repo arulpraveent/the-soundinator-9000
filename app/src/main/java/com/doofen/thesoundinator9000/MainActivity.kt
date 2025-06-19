@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.doofen.thesoundinator9000.presentation.screens.home.HomeScreen
+import com.doofen.thesoundinator9000.presentation.screens.main.MainScreen
 import com.doofen.thesoundinator9000.presentation.theme.TheSoundinator9000Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
             TheSoundinator9000Theme(
                 dynamicColor = false
             ) {
-                HomeScreen()
+                MainScreen()
             }
         }
     }
