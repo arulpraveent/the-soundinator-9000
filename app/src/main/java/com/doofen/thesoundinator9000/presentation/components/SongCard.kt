@@ -13,16 +13,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.doofen.thesoundinator9000.domain.model.Song
 
 @Composable
 fun SongCard(
     modifier: Modifier = Modifier,
-    title: String,
-    artist: String
+    song: Song,
+    onClick: () -> Unit
 ) {
     Card (
         modifier = modifier
             .padding(8.dp)
+            .clickable(
+                onClick = { onClick() }
+            )
     ) {
         Column (
             modifier = Modifier
@@ -32,13 +36,13 @@ fun SongCard(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = title,
+                text = song.title,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = artist,
+                text = song.artist,
                 style = MaterialTheme.typography.labelMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

@@ -11,12 +11,5 @@ import androidx.media3.ui.PlayerView
 
 @Composable
 fun PlayerScreen(
-    viewModel: PlayerViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-    val player = remember { viewModel.getPlayer() }
-
-    viewModel.playSong("/storage/emulated/0/Android/media/com.hihonor.medialibrary/_product_h_region_comm_oversea_media_Pre-loaded/Pre-loaded/Music/Go_Beyond_Sonna.mp3")
-
-
 }

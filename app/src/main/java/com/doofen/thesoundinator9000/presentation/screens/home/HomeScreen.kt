@@ -35,8 +35,10 @@ fun HomeScreen(
             LazyColumn(modifier) {
                 items(songs) { song ->
                     SongCard(
-                        title = song.title,
-                        artist = song.artist
+                        song = song,
+                        onClick = {
+                            playerViewModel.playSong(song.filePath)
+                        }
                     )
                 }
             }
