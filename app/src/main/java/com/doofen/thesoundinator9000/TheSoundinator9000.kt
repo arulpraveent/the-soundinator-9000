@@ -8,15 +8,11 @@ import javax.inject.Inject
 @HiltAndroidApp
 class TheSoundinator9000 : Application() {
 
-    @Inject
-    private lateinit var exoPlayer: ExoPlayer
-
     override fun onCreate() {
         super.onCreate()
     }
 
     override fun onTerminate() {
         super.onTerminate()
-        exoPlayer.release()
     }
 }
