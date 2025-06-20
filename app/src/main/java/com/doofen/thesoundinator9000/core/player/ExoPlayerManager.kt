@@ -1,4 +1,4 @@
-package com.doofen.thesoundinator9000.data.player
+package com.doofen.thesoundinator9000.core.player
 
 import android.content.Context
 import androidx.media3.common.MediaItem

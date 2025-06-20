@@ -2,7 +2,7 @@ package com.doofen.thesoundinator9000.presentation.screens.player
 
 import androidx.lifecycle.ViewModel
 import androidx.media3.exoplayer.ExoPlayer
-import com.doofen.thesoundinator9000.data.player.ExoPlayerManager
+import com.doofen.thesoundinator9000.core.player.ExoPlayerManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,8 +19,4 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun getPlayer(): ExoPlayer = exoPlayerManager.getPlayer()
-
-    fun release() {
-        exoPlayerManager.release()
-    }
 }

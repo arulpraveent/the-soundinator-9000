@@ -16,20 +16,20 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SongCard(
+    modifier: Modifier = Modifier,
     title: String,
-    artist: String,
-    modifier: Modifier = Modifier
+    artist: String
 ) {
     Card (
         modifier = modifier
             .padding(8.dp)
     ) {
         Column (
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .padding(4.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
         ) {
             Text(
                 text = title,
