@@ -19,6 +19,7 @@ import com.doofen.thesoundinator9000.presentation.screens.player.PlayerViewModel
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    playerViewModel: PlayerViewModel,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -33,8 +34,6 @@ fun HomeScreen(
             val songs = (state as HomeUiState.Success).songs
             LazyColumn(modifier) {
                 items(songs) { song ->
-                    println(song.contentUri)
-                    println(song.filePath)
                     SongCard(
                         title = song.title,
                         artist = song.artist

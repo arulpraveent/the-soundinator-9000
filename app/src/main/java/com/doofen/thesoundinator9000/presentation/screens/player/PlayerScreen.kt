@@ -16,15 +16,7 @@ fun PlayerScreen(
     val context = LocalContext.current
     val player = remember { viewModel.getPlayer() }
 
-    viewModel.playSong("content://media/external/audio/media/1000000024")
+    viewModel.playSong("/storage/emulated/0/Android/media/com.hihonor.medialibrary/_product_h_region_comm_oversea_media_Pre-loaded/Pre-loaded/Music/Go_Beyond_Sonna.mp3")
 
-    AndroidView(
-        factory = {
-            PlayerView(context).apply {
-                useController = true
-                setPlayer(player)
-            }
-        },
-        modifier = Modifier.fillMaxSize()
-    )
+
 }

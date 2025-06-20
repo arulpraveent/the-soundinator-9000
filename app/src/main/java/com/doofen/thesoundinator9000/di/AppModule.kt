@@ -1,7 +1,7 @@
 package com.doofen.thesoundinator9000.di
 
 import android.content.Context
-import com.doofen.thesoundinator9000.data.player.ExoPlayerManager
+import com.doofen.thesoundinator9000.core.player.ExoPlayerManager
 import com.doofen.thesoundinator9000.data.repository.SongRepositoryImpl
 import com.doofen.thesoundinator9000.domain.repository.SongRepository
 import com.doofen.thesoundinator9000.domain.usecase.GetAllSongsUseCase

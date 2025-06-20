@@ -23,14 +23,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.doofen.thesoundinator9000.R
 import com.doofen.thesoundinator9000.presentation.navigation.MainNavGraph
+import com.doofen.thesoundinator9000.presentation.navigation.sharedViewModel
 import com.doofen.thesoundinator9000.presentation.screens.home.HomeScreen
 import com.doofen.thesoundinator9000.presentation.screens.player.PlayerScreen
+import com.doofen.thesoundinator9000.presentation.screens.player.PlayerViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun MainScreen() {
@@ -39,12 +43,17 @@ fun MainScreen() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    Scaffold(
+    Scaffold (
+        modifier = Modifier
+            .imePadding()
+            .windowInsetsPadding(
+                WindowInsets.systemBars
+            ),
         topBar = {
             Row (
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = "Soundinator",
@@ -55,20 +64,27 @@ fun MainScreen() {
             }
         },
         content = { innerPadding ->
-            NavHost(navController, startDestination = "home_screen") {
-                composable(route = MainNavGraph.Home.route) {
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
+            NavHost(navController, startDestination = "home_screen", route = "root") {
+                composable(route = MainNavGraph.Home.route) { backStackEntry ->
+                    val playerViewModel: PlayerViewModel = sharedViewModel(navController,"root")
+                    HomeScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        playerViewModel = playerViewModel
+                    )
                 }
-                composable(route = MainNavGraph.Player.route) {
+                composable(route = MainNavGraph.Player.route) { backStackEntry ->
+                    val playerViewModel = hiltViewModel<PlayerViewModel>(
+                        navController.getBackStackEntry("root")
+                    )
                     PlayerScreen()
                 }
             }
         },
         bottomBar = {
             Row (
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 NavigationBar {
                     NavigationBarItem (
@@ -114,11 +130,6 @@ fun MainScreen() {
                     )
                 }
             }
-        },
-        modifier = Modifier
-            .imePadding()
-            .windowInsetsPadding(
-                WindowInsets.systemBars
-            )
+        }
     )
 }
