@@ -1,7 +1,9 @@
 package com.doofen.thesoundinator9000.di
 
 import android.content.Context
-import com.doofen.thesoundinator9000.core.player.ExoPlayerManager
+import androidx.media3.common.AudioAttributes
+import androidx.media3.common.C
+import androidx.media3.exoplayer.ExoPlayer
 import com.doofen.thesoundinator9000.data.repository.SongRepositoryImpl
 import com.doofen.thesoundinator9000.domain.repository.SongRepository
 import com.doofen.thesoundinator9000.domain.usecase.GetAllSongsUseCase
@@ -27,12 +29,4 @@ object AppModule {
     fun provideGetAllSongsUseCase(
         repo: SongRepository
     ): GetAllSongsUseCase = GetAllSongsUseCase(repo)
-
-    @Provides
-    @Singleton
-    fun provideExoPlayerManager(
-        @ApplicationContext context: Context
-    ): ExoPlayerManager {
-        return ExoPlayerManager(context)
-    }
 }

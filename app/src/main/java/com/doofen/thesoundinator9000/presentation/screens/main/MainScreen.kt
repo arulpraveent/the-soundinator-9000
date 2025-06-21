@@ -24,10 +24,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraph
+import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.doofen.thesoundinator9000.R
 import com.doofen.thesoundinator9000.presentation.navigation.MainNavGraph
 import com.doofen.thesoundinator9000.presentation.navigation.sharedViewModel
@@ -64,15 +67,15 @@ fun MainScreen() {
             }
         },
         content = { innerPadding ->
-            NavHost(navController, startDestination = "home_screen", route = "root") {
-                composable(route = MainNavGraph.Home.route) { backStackEntry ->
+            NavHost(navController = navController, startDestination = "home_screen", route = "root") {
+                composable(route = MainNavGraph.Home.route) {
                     val playerViewModel: PlayerViewModel = sharedViewModel(navController,"root")
                     HomeScreen(
                         modifier = Modifier.padding(innerPadding),
                         playerViewModel = playerViewModel
                     )
                 }
-                composable(route = MainNavGraph.Player.route) { backStackEntry ->
+                composable(route = MainNavGraph.Player.route) {
                     val playerViewModel = hiltViewModel<PlayerViewModel>(
                         navController.getBackStackEntry("root")
                     )

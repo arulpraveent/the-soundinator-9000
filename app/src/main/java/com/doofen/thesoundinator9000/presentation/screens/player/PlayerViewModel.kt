@@ -1,22 +1,21 @@
 package com.doofen.thesoundinator9000.presentation.screens.player
 
 import androidx.lifecycle.ViewModel
-import androidx.media3.exoplayer.ExoPlayer
-import com.doofen.thesoundinator9000.core.player.ExoPlayerManager
+import com.doofen.thesoundinator9000.domain.model.Song
+import com.doofen.thesoundinator9000.player.AudioPlayerManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
-    private val exoPlayerManager: ExoPlayerManager
+    private val audioPlayerManager: AudioPlayerManager
 ) : ViewModel() {
-    fun playSong(path: String) {
-        exoPlayerManager.playFromUri(path)
+
+    fun playSong(song: Song) {
+        audioPlayerManager.playSong(song)
     }
 
-    fun pause() {
-        exoPlayerManager.pause()
+    init {
+        audioPlayerManager.initialize()
     }
-
-    fun getPlayer(): ExoPlayer = exoPlayerManager.getPlayer()
 }
