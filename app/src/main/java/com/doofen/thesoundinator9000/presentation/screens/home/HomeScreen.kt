@@ -37,7 +37,7 @@ fun HomeScreen(
                     SongCard(
                         song = song,
                         onClick = {
-                            playerViewModel.playSong(song.filePath)
+                            playerViewModel.playSong(song)
                         }
                     )
                 }
